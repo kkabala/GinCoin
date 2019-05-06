@@ -228,18 +228,7 @@ apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--fo
 build-essential libtool autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev \
 libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl libdb4.8-dev bsdmainutils libdb4.8++-dev \
 libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev  libdb5.3++>/dev/null 2>&1
-if [ "$?" -gt "0" ];
-  then
-    echo -e "${RED}Not all required packages were installed properly. Try to install them manually by running the following commands:${NC}\n"
-    echo "apt-get update"
-    echo "apt -y install software-properties-common"
-    echo "apt-add-repository -y ppa:bitcoin/bitcoin"
-    echo "apt-get update"
-    echo "apt install -y make build-essential libtool software-properties-common autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev \
-libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git curl libdb4.8-dev \
-bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw fail2ban pkg-config libevent-dev"
- exit 1
-fi
+
 
 clear
 }
@@ -268,6 +257,21 @@ function setup_node() {
   configure_systemd
 }
 
+function add_nodes() {
+  cd /usr/local/bin
+  ./gincoin-cli addnode "144.202.76.97:56882" "onetry"
+  ./gincoin-cli addnode "144.217.12.42:48332" "onetry"
+  ./gincoin-cli addnode "144.217.242.41:49706" "onetry"
+  ./gincoin-cli addnode "149.248.17.243:50762" "onetry"
+  ./gincoin-cli addnode "149.248.50.23:60846" "onetry"
+  ./gincoin-cli addnode "149.248.53.106:57328" "onetry"
+  ./gincoin-cli addnode "149.248.57.93:37532" "onetry"
+  ./gincoin-cli addnode "149.248.60.176:59472" "onetry"
+  ./gincoin-cli addnode "149.28.119.247:53414" "onetry"
+  ./gincoin-cli addnode "149.28.131.90:10111" "onetry"
+  ./gincoin-cli addnode "149.28.15.55:39962" "onetry"
+  ./gincoin-cli addnode "149.28.174.173:10111" "onetry"
+}
 
 ##### Main #####
 clear
@@ -276,3 +280,4 @@ update_node
 prepare_system
 compile_node
 setup_node
+add_nodes
